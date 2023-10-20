@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import Map from "./components/map/Map";
 import Tooltip from "./components/tooltip/Tooltip";
 import "./styles.css";
@@ -6,18 +6,13 @@ import { debounce } from "./helpers/debounce";
 import { onMouseEnter } from "./helpers/mouseEnter";
 
 type Props = {
-  tooltipChildren?: React.ReactNode;
+  customTooltip?: ReactNode;
   layers: string[];
   colors: string[];
   countriesData: { country: string; amount: number; data?: any[] }[];
 };
 
-function MapComponent({
-  tooltipChildren,
-  layers,
-  colors,
-  countriesData,
-}: Props) {
+function MapComponent({ customTooltip, layers, colors, countriesData }: Props) {
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
   const [countryData, setCountryData] = useState<{ name: string; data?: any }>({
     name: "",
@@ -52,9 +47,13 @@ function MapComponent({
         onMouseEnter={debouncedMouseEnter}
         dataPerCountry={countriesData}
       />
-      <Tooltip x={x} y={y} showTooltip={showTooltip} countryData={countryData}>
-        {tooltipChildren}
-      </Tooltip>
+      <Tooltip
+        x={x}
+        y={y}
+        showTooltip={showTooltip}
+        countryData={countryData}
+        children={customTooltip}
+      />
     </div>
   );
 }
