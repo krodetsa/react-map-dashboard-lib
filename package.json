@@ -18,9 +18,13 @@
     "@types/node": "^20.8.7",
     "@types/react": "^18.2.30",
     "@types/react-dom": "^18.2.14",
+    "country-list": "^2.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
     "typescript": "4.9.4"
+  },
+  "devDependencies": {
+    "@types/country-list": "^2.1.3"
   }
 }

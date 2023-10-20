@@ -1,22 +1,22 @@
 .map-container {
   height: auto;
   position: relative;
-  /* temp */
-  margin: 50px auto;
-  width: 50%;
+  width: 100%; 
 }
 .map-container svg {
   width: 100%;
   height: auto;
 }
 .map-container svg path {
-  cursor: pointer;
   transition: all 0.3s ease-in-out;
+  padding: 30px;
 }
-.map-container svg path:hover {
+.map-container svg .hoverable {
+  cursor: pointer;
+}
+.map-container svg .hoverable:hover {
   transform: scale3d(1.003, 1.0, 1) perspective(10px);
   stroke-width: 3px;
-
   z-index: 999;
 }
 .tooltip-container {

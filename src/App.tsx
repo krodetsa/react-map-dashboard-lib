@@ -7,10 +7,21 @@ import { onMouseEnter } from "./helpers/mouseEnter";
 
 type Props = {
   tooltipChildren?: React.ReactNode;
+  layers: string[];
+  colors: string[];
+  countriesData: { country: string; amount: number; data?: any[] }[];
 };
-function MapComponent({ tooltipChildren }: Props) {
-  const [countrySelected, setCountrySelected] = useState<string | null>("");
+
+function MapComponent({
+  tooltipChildren,
+  layers,
+  colors,
+  countriesData,
+}: Props) {
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
+  const [countryData, setCountryData] = useState<{ name: string; data?: any }>({
+    name: "",
+  });
   const [x, setX] = useState<number>(0);
   const [y, setY] = useState<number>(0);
   const parentContainerRef = useRef<HTMLDivElement>(null);
@@ -22,24 +33,26 @@ function MapComponent({ tooltipChildren }: Props) {
     (e) =>
       onMouseEnter(
         e,
-        setCountrySelected,
         setShowTooltip,
         setX,
         setY,
-        parentContainerRef
+        parentContainerRef,
+        countriesData,
+        setCountryData
       ),
     200
   );
 
   return (
     <div ref={parentContainerRef} className="map-container">
-      <Map onMouseLeave={onMouseLeave} onMouseEnter={debouncedMouseEnter} />
-      <Tooltip
-        x={x}
-        y={y}
-        showTooltip={showTooltip}
-        countrySelected={countrySelected}
-      >
+      <Map
+        layers={layers}
+        colors={colors}
+        onMouseLeave={onMouseLeave}
+        onMouseEnter={debouncedMouseEnter}
+        dataPerCountry={countriesData}
+      />
+      <Tooltip x={x} y={y} showTooltip={showTooltip} countryData={countryData}>
         {tooltipChildren}
       </Tooltip>
     </div>

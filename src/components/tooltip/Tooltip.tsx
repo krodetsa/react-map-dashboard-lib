@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 
+/**
+ * Renders a tooltip element.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string | null} props.countrySelected - The selected country name.
+ * @param {number} props.x - The x-coordinate of the tooltip.
+ * @param {number} props.y - The y-coordinate of the tooltip.
+ * @param {boolean} props.showTooltip - Whether to show the tooltip.
+ * @param {React.ReactNode} [props.children] - The child elements to render.
+ * @returns {JSX.Element} - The rendered tooltip element.
+ */
+
 type Props = {
-  countrySelected: string | null;
+  countryData: { name: string; data?: any };
   showTooltip: boolean;
   x: number;
   y: number;
   children?: React.ReactNode;
 };
 
-const Tooltip = ({ countrySelected, x, y, showTooltip, children }: Props) => {
+const Tooltip = ({ countryData, x, y, showTooltip, children }: Props) => {
   const tooltipRef = React.useRef<HTMLDivElement>(null);
   const [offsetX, setOffsetX] = useState<number>(0);
   const [offsetY, setOffsetY] = useState<number>(0);
@@ -30,7 +43,7 @@ const Tooltip = ({ countrySelected, x, y, showTooltip, children }: Props) => {
       }}
       className="tooltip-container"
     >
-      {countrySelected}
+      {countryData.name}
       <div className="tooltip-children-container">{children}</div>
     </div>
   );
