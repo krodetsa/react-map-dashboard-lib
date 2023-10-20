@@ -5,8 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "scripts": {
-    "build": "tsc",
-    "preversion": "npm version patch"
+    "build": "tsc"
   },
   "author": "Maxim Bliznetsov",
   "license": "MIT",
