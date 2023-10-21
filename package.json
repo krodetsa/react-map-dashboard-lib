@@ -1,8 +1,9 @@
 {
   "name": "react-map-dashboard",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "React Map component with tooltip and other features",
   "homepage": "https://react-map-dashboard-playground.vercel.app",
+  "keywords": ["React", "map", "javascript", "dashboard"],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "scripts": {
