@@ -29,7 +29,7 @@ const Map = ({
         });
       }
     });
-  }, [dataPerCountry, layers]);
+  }, [dataPerCountry, layers, colors]);
 
   return (
     <svg

@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { getCode } from "country-list";
 
 type Props = {
-  countryData: { name: string; data?: any };
+  countryData: { name: string; data?: any; country?: string; amount?: number };
   showTooltip: boolean;
   x: number;
   y: number;
   children?: any;
+  parentRef?: React.RefObject<HTMLDivElement>;
 };
 
-const Tooltip = ({ countryData, x, y, showTooltip, children }: Props) => {
+const Tooltip = ({
+  countryData,
+  x,
+  y,
+  showTooltip,
+  children,
+  parentRef,
+}: Props) => {
   const renderChildren = () => {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
@@ -18,28 +27,51 @@ const Tooltip = ({ countryData, x, y, showTooltip, children }: Props) => {
   };
 
   const tooltipRef = React.useRef<HTMLDivElement>(null);
-  const [offsetX, setOffsetX] = useState<number>(0);
   const [offsetY, setOffsetY] = useState<number>(0);
+  const [offsetX, setOffsetX] = useState<number>(0);
   useEffect(() => {
     const { current } = tooltipRef;
-    if (current) {
+    const parentContainer = parentRef?.current;
+    if (current && parentContainer) {
+      const parentContainerDimensions = parentContainer.getBoundingClientRect();
+      const parentWidth = parentContainerDimensions.width;
+
       const { width, height } = current.getBoundingClientRect();
-      setOffsetX(width / 2);
-      setOffsetY(height + 10);
+      if (x + width > parentWidth) {
+        setOffsetX(width);
+      } else {
+        setOffsetX(0);
+      }
+      setOffsetY(height);
     }
-  }, []);
+  }, [parentRef, x]);
+
   return (
     <div
       ref={tooltipRef}
       style={{
-        left: x - offsetX,
         top: y - offsetY,
+        left: x - offsetX,
+
         opacity: showTooltip ? 1 : 0,
       }}
       className="tooltip-container"
     >
-      {countryData.name}
-      {renderChildren() && renderChildren()}
+      {renderChildren() ? (
+        renderChildren()
+      ) : (
+        <div className="tooltip-default">
+          <h3>{countryData.name}</h3>
+          <p>
+            <b>Country code: </b>
+            {countryData.country}
+          </p>
+          <p>
+            <b>Amount: </b>
+            {countryData.amount}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

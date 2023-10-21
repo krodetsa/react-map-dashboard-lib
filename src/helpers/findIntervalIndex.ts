@@ -1,4 +1,4 @@
-export function findIntervalIndex(number:any , layers:any) {
+export function findIntervalIndex(number: number, layers: any[]) {
   for (let i = 0; i < layers.length; i++) {
     const [start, end] = layers[i].split("-").map(Number);
 
