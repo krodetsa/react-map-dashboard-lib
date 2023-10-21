@@ -1,6 +1,6 @@
 {
   "name": "react-map-dashboard",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "React Map component with tooltip and other features",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

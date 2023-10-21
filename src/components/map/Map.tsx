@@ -34,7 +34,7 @@ const Map = ({
   return (
     <svg
       baseProfile="tiny"
-      fill="#739899"
+      fill="#a8b5b5"
       height="857"
       stroke="#fff"
       strokeLinecap="round"
