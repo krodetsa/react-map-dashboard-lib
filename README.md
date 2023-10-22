@@ -43,7 +43,7 @@ This library uses [country-list](https://github.com/fannarsh/country-list) as a 
 You can use both the standard tooltip and your custom one. To do this, create a component and pass it to `customTooltip`:
 
 ```jsx
-const CustomTooltip = ({ props }) => {
+const CustomTooltip = (props) => {
   return (
     <div>
       <p>{props.country}</p>
